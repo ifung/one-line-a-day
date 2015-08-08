@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 One Line a Day
+  hr
+  h3 #{moment().format('MMMM D')}
+  form(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .col-sm-8.col-sm-offset-2
+      .form-group
+        label.control-label(for='entry') #{moment().format('YYYY')}
+        input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
+      .form-group
+        button.btn.btn-primary(type='submit')
+          | Save

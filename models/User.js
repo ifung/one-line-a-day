@@ -18,7 +18,7 @@ var userSchema = new mongoose.Schema({
     picture: { type: String, default: '' }
   },
   
-  journal: Schema.Types.Mixed,
+  journal: mongoose.Schema.Types.Mixed,
 
   resetPasswordToken: String,
   resetPasswordExpires: Date
