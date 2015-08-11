@@ -84,11 +84,7 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(function(req, res, next) {
-  console.log("outside" + req.path);
-  if (/api/i.test(req.path)) {
-    console.log(req.path);
-    req.session.returnTo = req.path;
-  }
+  if (/api/i.test(req.path)) req.session.returnTo = req.path;
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
@@ -97,6 +93,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.post('/', passportConf.isAuthenticated, userController.postJournalEntry);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);

@@ -1,12 +1,17 @@
+var User = require('../models/User');
+
 /**
  * GET /
  * Home page.
  */
 exports.index = function(req, res) {
   if (req.user) {
-    res.render('journal', {
-      title: 'Journal'
-    })
+    User.findById(req.user.id, function(err, user) {
+      res.render('journal', {
+        title: 'Journal',
+        journal: user.journal
+      })
+    });
   }
   else
   {

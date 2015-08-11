@@ -4,6 +4,13 @@ block content
   h1 One Line a Day
   hr
   h3 #{moment().format('MMMM D')}
+  
+  - var today = moment().format('MMDD')
+  - var entries = journal[today]
+  
+  each entry, year in entries   
+    h4= year + ': ' + entry
+  
   form(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .col-sm-8.col-sm-offset-2

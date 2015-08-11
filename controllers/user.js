@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
+var moment = require('moment');
 
 /**
  * GET /login
@@ -354,5 +355,23 @@ exports.postForgot = function(req, res, next) {
   ], function(err) {
     if (err) return next(err);
     res.redirect('/forgot');
+  });
+};
+
+/**
+ * POST /journal
+ * Save new journal entry.
+ */
+exports.postJournalEntry = function(req, res, next) {  
+  var monthday = moment().format("MMDD");
+  var year = moment().format("YYYY");
+  var update = { $set: {} };
+  
+  update.$set["journal." + monthday + "." + year] = req.body.entry;
+  
+  User.findByIdAndUpdate(req.user.id, update, function(err, user) {
+    if (err) return next(err);
+    req.flash('success', { msg: 'New entry saved.' });
+    res.redirect('/');
   });
 };
