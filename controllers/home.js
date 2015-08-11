@@ -1,9 +1,22 @@
+var User = require('../models/User');
+
 /**
  * GET /
  * Home page.
  */
 exports.index = function(req, res) {
-  res.render('home', {
-    title: 'Home'
-  });
+  if (req.user) {
+    User.findById(req.user.id, function(err, user) {
+      res.render('journal', {
+        title: 'Journal',
+        journal: user.journal
+      })
+    });
+  }
+  else
+  {
+    res.render('home', {
+      title: 'Home'
+    })
+  }
 };

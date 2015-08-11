@@ -21,7 +21,7 @@
 
 module.exports = {
 
-  db: process.env.MONGODB || 'mongodb://localhost:27017/test',
+  db: process.env.MONGODB || 'mongodb://irene:oneline@ds047901.mongolab.com:47901/heroku_x495qhlp',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
@@ -50,8 +50,8 @@ module.exports = {
   },
 
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '754220301289665',
-    clientSecret: process.env.FACEBOOK_SECRET || '41860e58c256a3d7ad8267d3c1939a4a',
+    clientID: process.env.FACEBOOK_ID || '1691437714411143',
+    clientSecret: process.env.FACEBOOK_SECRET || 'df66f95a040dc92e04fac87fb4e77ffa',
     callbackURL: '/auth/facebook/callback',
     passReqToCallback: true
   },
@@ -78,8 +78,8 @@ module.exports = {
   },
 
   google: {
-    clientID: process.env.GOOGLE_ID || '828110519058.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_SECRET || 'JdZsIaWhUFIchmC1a_IZzOHb',
+    clientID: process.env.GOOGLE_ID || '332008252506-m9a1a0et1c6i2rm2vrg0h4ug2nqpng16.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || '0jTKMOg_t1hkY-AVEJDldPBh',
     callbackURL: '/auth/google/callback',
     passReqToCallback: true
   },
