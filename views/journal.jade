@@ -1,23 +1,30 @@
 extends layout
 
-block content
-  h1 One Line a Day
+block content 
+  h2 #{moment().format('MMMM D')}
   hr
-  h3 #{moment().format('MMMM D')}
   
-  - var today = moment().format('MMDD')
+  - var monthday = moment().format('MMDD')
+  - var year = moment().format('YYYY')
+
   if journal
-    - var entries = journal[today]
+    - var entries = journal[monthday]
   
-    each entry, year in entries   
-      h4= year + ': ' + entry
+    each entry, year in entries
+      div.row
+        div.col-md-1
+          h4= year
+        div.col-md-6
+          h4= entry
   
-  form(method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .col-sm-8.col-sm-offset-2
-      .form-group
-        label.control-label(for='entry') #{moment().format('YYYY')}
-        input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
-      .form-group
-        button.btn.btn-primary(type='submit')
-          | Save
+  if !journal[monthday][year]
+    div.row
+      div.col-md-1
+        h4= year
+      div.col-md-6
+        form.form-inline(method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
+            button.btn.btn-primary(type='submit')
+              | Save
