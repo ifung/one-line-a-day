@@ -6,10 +6,11 @@ block content
   h3 #{moment().format('MMMM D')}
   
   - var today = moment().format('MMDD')
-  - var entries = journal[today]
+  if journal
+    - var entries = journal[today]
   
-  each entry, year in entries   
-    h4= year + ': ' + entry
+    each entry, year in entries   
+      h4= year + ': ' + entry
   
   form(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
