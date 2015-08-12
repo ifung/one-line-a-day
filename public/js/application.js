@@ -15,4 +15,5 @@
 
 //= require lib/jquery-2.1.3.min
 //= require lib/bootstrap.min
+//= require lib/jstz-1.0.4.min
 //= require main

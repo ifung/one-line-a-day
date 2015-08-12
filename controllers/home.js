@@ -9,7 +9,8 @@ exports.index = function(req, res) {
     User.findById(req.user.id, function(err, user) {
       res.render('journal', {
         title: 'Journal',
-        journal: user.journal
+        journal: user.journal,
+        timezone: req.cookies.timezone
       })
     });
   }

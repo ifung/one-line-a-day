@@ -1,5 +1,8 @@
 $(document).ready(function() {
-
-  // Place JavaScript code here...
-
+  
+  jQuery(function() {
+    var timezone = jstz.determine();
+    document.cookie = 'timezone=' + timezone.name() + ';';
+  });
 });
+
