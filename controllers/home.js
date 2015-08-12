@@ -5,7 +5,7 @@ var User = require('../models/User');
  * Home page.
  */
 exports.index = function(req, res) {
-  console.log("Cookies: ", req.cookies);
+  console.log("Cookies: ", req.cookies.timezone);
   
   if (req.user) {
     User.findById(req.user.id, function(err, user) {
