@@ -38,8 +38,8 @@ var passportConf = require('./config/passport');
  * Create Express server.
  */
 var app = express();
-app.locals.moment = require('moment');
-app.locals.momentTimezone = require('moment-timezone');
+//app.locals.moment = require('moment');
+app.locals.moment = require('moment-timezone');
 
 /**
  * Connect to MongoDB.
