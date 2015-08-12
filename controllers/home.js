@@ -12,8 +12,7 @@ exports.index = function(req, res) {
       res.render('journal', {
         title: 'Journal',
         journal: user.journal,
-//        timezone: req.cookies.timezone
-        timezone: 'Africa/Accra'
+        timezone: req.cookies.timezone
       })
     });
   }
