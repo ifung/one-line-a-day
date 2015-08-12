@@ -7,7 +7,7 @@ block content
   - var monthday = moment().format('MMDD')
   - var year = moment().format('YYYY')
 
-  if journal
+  if journal && journal[monthday]
     - var entries = journal[monthday]
   
     each entry, year in entries
