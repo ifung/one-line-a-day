@@ -1,7 +1,7 @@
 extends layout
 
 block content 
-  h2 #{moment().tz('America/Los_Angeles').format('MMMM D z')}
+  h2 #{moment().tz(timezone).format('MMMM D z')}
   hr
   
   - var monthday = moment().format('MMDD')
