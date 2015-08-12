@@ -1,30 +1,31 @@
 extends layout
 
-block content 
-  h2 #{moment().tz(timezone).format('MMMM D z')}
-  hr
-  
-  - var monthday = moment().format('MMDD')
-  - var year = moment().format('YYYY')
+block content
+  .container.journal-container
+    h3.text-center.day-of-week #{moment().tz(timezone).format('dddd')}
+    h2.text-center.day-of-month #{moment().tz(timezone).format('MMMM D')}
 
-  if journal && journal[monthday]
-    - var entries = journal[monthday]
-  
-    each entry, year in entries
-      div.row
-        div.col-md-1
-          h4= year
-        div.col-md-6
-          h4= entry
-  
-  if !journal || !journal[monthday] || !journal[monthday][year]
-    div.row
-      div.col-md-1
-        h4= year
-      div.col-md-6
-        form.form-inline(method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
-          .form-group
-            input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
-            button.btn.btn-primary(type='submit')
-              | Save
+    - var monthday = moment().format('MMDD')
+    - var year = moment().format('YYYY')
+
+    if journal && journal[monthday]
+      - var entries = journal[monthday]
+
+      each entry, year in entries
+        .row.journal-row
+          .col-md-1
+            p= year
+          .col-md-11
+            p.lead.journal-entry= entry
+
+    if !journal || !journal[monthday] || !journal[monthday][year]
+      .row.journal-row
+        .col-md-1
+          p= year
+        .col-md-11
+          .form(method='POST')
+            .form-group
+              input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
+            .form-group
+              button.btn.btn-primary(type='submit')
+                | Save

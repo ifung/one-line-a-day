@@ -1,7 +1,8 @@
 @import "vendor/bootstrap/bootstrap";
 @import "vendor/font-awesome/font-awesome";
 @import "vendor/bootstrap-social";
-@import "themes/default";
+@import "themes/bootswatch";
+@import "themes/variables";
 
 // Scaffolding
 // -------------------------
@@ -52,6 +53,38 @@ footer {
   padding: 0;
   border-radius: 0;
   box-shadow: 0 0 5px #ccc, inset 0 0 0 #000;
+}
+
+// Journal
+// -------------------------
+
+.day-of-week {
+  margin-top: 50px;
+  margin-bottom: 5px;
+}
+
+.day-of-month {
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+.journal-container {
+  @media (min-width: @screen-sm-min) {
+    width: 600px;
+  }
+}
+
+.journal-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.journal-row p {
+  margin-bottom: 20px; 
+}
+
+.journal-entry {
+ line-height: 1;
 }
 
 // Font Icons
