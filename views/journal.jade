@@ -17,7 +17,7 @@ block content
         div.col-md-6
           h4= entry
   
-  if !journal[monthday] || !journal[monthday][year]
+  if !journal || !journal[monthday] || !journal[monthday][year]
     div.row
       div.col-md-1
         h4= year
