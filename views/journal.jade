@@ -4,8 +4,14 @@ block content
   .container.journal-container
     - var currTz = moment().tz(timezone)
     
-    h3.text-center.day-of-week #{currTz.format('dddd')}
-    h2.text-center.day-of-month #{currTz.format('MMMM D')}
+    .row
+      h3.text-center.day-of-week #{currTz.format('dddd')}
+      .col-md-1
+        i.fa.fa-chevron-left.fa-2x
+      .col-md-10
+        h2.text-center.day-of-month #{currTz.format('MMMM D')}
+      .col-md-1
+        i.fa.fa-chevron-right.fa-2x
 
     - var monthday = currTz.format('MMDD')
     - var year = currTz.format('YYYY')
