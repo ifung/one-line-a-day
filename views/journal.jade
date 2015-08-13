@@ -5,8 +5,8 @@ block content
     h3.text-center.day-of-week #{moment().tz(timezone).format('dddd')}
     h2.text-center.day-of-month #{moment().tz(timezone).format('MMMM D')}
 
-    - var monthday = moment().format('MMDD')
-    - var year = moment().format('YYYY')
+    - var monthday = moment().tz(timezone).format('MMDD')
+    - var year = moment().tz(timezone).format('YYYY')
 
     if journal && journal[monthday]
       - var entries = journal[monthday]
