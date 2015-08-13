@@ -2,11 +2,13 @@ extends layout
 
 block content
   .container.journal-container
-    h3.text-center.day-of-week #{moment().tz(timezone).format('dddd')}
-    h2.text-center.day-of-month #{moment().tz(timezone).format('MMMM D')}
+    - var currTz = moment().tz(timezone)
+    
+    h3.text-center.day-of-week #{currTz.format('dddd')}
+    h2.text-center.day-of-month #{currTz.format('MMMM D')}
 
-    - var monthday = moment().tz(timezone).format('MMDD')
-    - var year = moment().tz(timezone).format('YYYY')
+    - var monthday = currTz.format('MMDD')
+    - var year = currTz.format('YYYY')
 
     if journal && journal[monthday]
       - var entries = journal[monthday]
