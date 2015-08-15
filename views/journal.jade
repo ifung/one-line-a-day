@@ -1,23 +1,18 @@
 extends layout
 
 block content
-  .container.journal-container
-    - var currTz = moment().tz(timezone)
-    
+  .container.journal-container    
     .row
-      h3.text-center.day-of-week #{currTz.format('dddd')}
+      h3.text-center.day-of-week #{month}
       .col-md-1
         i.fa.fa-chevron-left.fa-2x
       .col-md-10
-        h2.text-center.day-of-month #{currTz.format('MMMM D')}
+        h1.text-center.day-of-month #{day}
       .col-md-1
         i.fa.fa-chevron-right.fa-2x
 
-    - var monthday = currTz.format('MMDD')
-    - var year = currTz.format('YYYY')
-
-    if journal && journal[monthday]
-      - var entries = journal[monthday]
+    if journal
+      - var entries = journal
 
       each entry, year in entries
         .row.journal-row
@@ -26,7 +21,11 @@ block content
           .col-md-11
             p.lead.journal-entry= entry
 
-    if !journal || !journal[monthday] || !journal[monthday][year]
+    - var currTz = moment().tz(timezone)
+    - var monthday = currTz.format('MMDD')
+    - var year = currTz.format('YYYY')
+
+    if !journal || !journal[year]
       .row.journal-row
         .col-md-1
           p= year
@@ -36,5 +35,7 @@ block content
             .form-group
               label.sr-only(for='entry') How was your day?
               input.form-control(type='text', name='entry', id='entry', placeholder='How was your day?', autofocus=true)
+              input(type='hidden' name='monthday' value=monthday)
+              input(type='hidden' name='year' value=year)
             button.btn.btn-primary(type='submit')
               | Save

@@ -42,7 +42,7 @@ exports.postLogin = function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) return next(err);
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      res.redirect('/journal');
     });
   })(req, res, next);
 };
@@ -355,23 +355,5 @@ exports.postForgot = function(req, res, next) {
   ], function(err) {
     if (err) return next(err);
     res.redirect('/forgot');
-  });
-};
-
-/**
- * POST /journal
- * Save new journal entry.
- */
-exports.postJournalEntry = function(req, res, next) {  
-  var monthday = moment().format("MMDD");
-  var year = moment().format("YYYY");
-  var update = { $set: {} };
-  
-  update.$set["journal." + monthday + "." + year] = req.body.entry;
-  
-  User.findByIdAndUpdate(req.user.id, update, function(err, user) {
-    if (err) return next(err);
-    req.flash('success', { msg: 'New entry saved.' });
-    res.redirect('/');
   });
 };
