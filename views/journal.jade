@@ -1,15 +1,17 @@
 extends layout
 
 block content
-  .container.journal-container    
+  .container.journal-container
     .row
-      h3.text-center.day-of-week #{month}
-      .col-md-1
+      .col-xs-8.col-xs-offset-1.col-sm-10
+        h3.text-center.day-of-week #{month}
+    .row
+      .col-xs-1
         a(href='/journal/#{previous}')
           i.fa.fa-chevron-left.fa-2x
-      .col-md-10
+      .col-xs-8.col-sm-10
         h1.text-center.day-of-month #{day}
-      .col-md-1
+      .col-xs-1
         a(href='/journal/#{next}')
           i.fa.fa-chevron-right.fa-2x
 
@@ -18,9 +20,9 @@ block content
 
       each entry, year in entries
         .row.journal-row
-          .col-md-1
+          .col-sm-1.journal-year
             p= year
-          .col-md-11
+          .col-sm-11
             p.lead.journal-entry= entry
 
     - var currTz = moment().tz(timezone)
@@ -28,9 +30,9 @@ block content
 
     if !journal || !journal[year]
       .row.journal-row
-        .col-md-1
+        .col-sm-1.journal-year
           p= year
-        .col-md-11
+        .col-sm-11
           form(method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
             .form-group
