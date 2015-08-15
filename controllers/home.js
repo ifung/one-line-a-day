@@ -19,9 +19,7 @@ exports.index = function(req, res) {
         day: currTz.format('D')
       })
     });
-  }
-  else
-  {
+  } else {
     res.render('home', {
       title: 'Home'
     })

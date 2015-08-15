@@ -39,7 +39,7 @@ var passportConf = require('./config/passport');
  * Create Express server.
  */
 var app = express();
-//app.locals.moment = require('moment');
+app.locals.momentjs = require('moment');
 app.locals.moment = require('moment-timezone');
 
 /**
@@ -96,7 +96,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  */
 app.get('/', homeController.index);
 app.get('/journal', passportConf.isAuthenticated, journalController.getJournal);
-app.get('/journal/:date', passportConf.isAuthenticated, journalController.getJournalByDate);
+app.get('/journal/:date', passportConf.isAuthenticated, journalController.getJournal);
 app.post('/journal', passportConf.isAuthenticated, journalController.postJournal);
 app.post('/journal/:date', passportConf.isAuthenticated, journalController.postJournal);
 app.get('/login', userController.getLogin);

@@ -5,4 +5,3 @@ $(document).ready(function() {
     document.cookie = 'timezone=' + timezone.name() + ';';
   });
 });
-

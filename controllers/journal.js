@@ -2,54 +2,37 @@ var User = require('../models/User');
 var moment = require('moment');
 
 /**
- * GET /journal
- * Get journal entries for today.
+ * GET /journal/:date?
+ * Get journal entries.
  */
 exports.getJournal = function(req, res) {
-  var timezone = req.cookies.timezone;
-  var currTz = moment().tz(timezone);
-
-  if (req.user) {
-    User.findById(req.user.id, function(err, user) {
-      res.render('journal', {
-        title: 'Journal',
-        timezone: req.cookies.timezone,
-        journal: user.journal[currTz.format('MMDD')],
-        month: currTz.format('MMMM'),
-        day: currTz.format('D')
-      })
-    });
+  if (req.params.date) {
+    var monthday = req.params.date;
+    var monthObj = moment(monthday, 'MMDD');
+  } else {
+    var monthObj = moment().tz(req.cookies.timezone);
+    var monthday = monthObj.format('MMDD');
   }
-  else
-  {
-    res.render('home', {
-      title: 'Home'
-    })
-  }
-};
-
-/**
- * GET /journal/:date
- * Get journal entries for given date.
- */
-exports.getJournalByDate = function(req, res) {
-  var date = req.params.date;
-  var month = moment(date, 'MMDD').format('MMMM');
-  var day = moment(date, 'MMDD').format('D');
   
+  var month = monthObj.format('MMMM');
+  var day = monthObj.format('D');
+  var previous = monthObj.subtract(1, 'd').format('MMDD');
+  var next = monthObj.add(2, 'd').format('MMDD');
+
   if (req.user) {
     User.findById(req.user.id, function(err, user) {
       res.render('journal', {
         title: 'Journal',
         timezone: req.cookies.timezone,
-        journal: user.journal[date],
+        journal: user.journal[monthday],
+        monthday: monthday,
         month: month,
-        day: day
+        day: day,
+        previous: previous,
+        next: next
       })
     });
-  }
-  else
-  {
+  } else {
     res.render('home', {
       title: 'Home'
     })

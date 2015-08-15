@@ -5,11 +5,13 @@ block content
     .row
       h3.text-center.day-of-week #{month}
       .col-md-1
-        i.fa.fa-chevron-left.fa-2x
+        a(href='/journal/#{previous}')
+          i.fa.fa-chevron-left.fa-2x
       .col-md-10
         h1.text-center.day-of-month #{day}
       .col-md-1
-        i.fa.fa-chevron-right.fa-2x
+        a(href='/journal/#{next}')
+          i.fa.fa-chevron-right.fa-2x
 
     if journal
       - var entries = journal
@@ -22,7 +24,6 @@ block content
             p.lead.journal-entry= entry
 
     - var currTz = moment().tz(timezone)
-    - var monthday = currTz.format('MMDD')
     - var year = currTz.format('YYYY')
 
     if !journal || !journal[year]
