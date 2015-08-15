@@ -18,13 +18,18 @@ exports.getJournal = function(req, res) {
   var day = monthObj.format('D');
   var previous = monthObj.subtract(1, 'd').format('MMDD');
   var next = monthObj.add(2, 'd').format('MMDD');
-
+  var journal;
+  
   if (req.user) {
     User.findById(req.user.id, function(err, user) {
+      if (user.journal) {
+        journal = user.journal[monthday];
+      }
+      
       res.render('journal', {
         title: 'Journal',
         timezone: req.cookies.timezone,
-        journal: user.journal[monthday],
+        journal: journal,
         monthday: monthday,
         month: month,
         day: day,
