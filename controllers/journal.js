@@ -1,5 +1,6 @@
 var User = require('../models/User');
 var moment = require('moment');
+var sanitizeHtml = require('sanitize-html');
 
 /**
  * GET /journal/:date?
@@ -63,9 +64,14 @@ exports.postJournal = function(req, res, next) {
   var monthday = req.body.monthday;
   var year = req.body.year;
   var update = { $set: {} };
+  var dirty = req.body.entry;
+  var clean = sanitizeHtml(req.body.entry, {
+    allowedTags: [],
+    allowedAttributes: {}
+  });
   
-  update.$set["journal." + monthday + "." + year] = req.body.entry;
-  
+  update.$set["journal." + monthday + "." + year] = clean;
+
   User.findByIdAndUpdate(req.user.id, update, function(err, user) {
     if (err) return next(err);
     req.flash('success', { msg: 'New entry saved.' });
