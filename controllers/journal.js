@@ -6,12 +6,23 @@ var moment = require('moment');
  * Get journal entries.
  */
 exports.getJournal = function(req, res) {
+  var monthday, 
+      monthObj;
+  
+  // Date is given in parameters
   if (req.params.date) {
-    var monthday = req.params.date;
-    var monthObj = moment(monthday, 'MMDD');
+    monthday = req.params.date;
+    monthObj = moment(monthday, 'MMDD');
+    
+    var errors = !monthObj.isValid();
+  
+    if (errors) {
+      req.flash('errors', { msg: 'Date is not valid.' });
+      return res.redirect('/journal');
+    }
   } else {
-    var monthObj = moment().tz(req.cookies.timezone);
-    var monthday = monthObj.format('MMDD');
+    monthObj = moment().tz(req.cookies.timezone);
+    monthday = monthObj.format('MMDD');
   }
   
   var month = monthObj.format('MMMM');
