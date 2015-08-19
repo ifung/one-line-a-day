@@ -75,6 +75,6 @@ exports.postJournal = function(req, res, next) {
   User.findByIdAndUpdate(req.user.id, update, function(err, user) {
     if (err) return next(err);
     req.flash('success', { msg: 'New entry saved.' });
-    res.redirect('/journal');
+    res.redirect('/journal/' + monthday);
   });
 };
