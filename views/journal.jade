@@ -3,13 +3,13 @@ extends layout
 block content
   .container.journal-container
     .row
-      .col-xs-8.col-xs-offset-1.col-sm-10
+      .col-xs-offset-2.col-xs-8
         h3.text-center.day-of-week #{month}
     .row
-      .col-xs-1
+      .col-xs-offset-1.col-xs-1
         a(href='/journal/#{previous}')
           i.fa.fa-chevron-left.fa-2x
-      .col-xs-8.col-sm-10
+      .col-xs-8
         h1.text-center.day-of-month #{day}
       .col-xs-1
         a(href='/journal/#{next}')
